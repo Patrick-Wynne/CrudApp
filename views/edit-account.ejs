@@ -1,0 +1,38 @@
+<%- include('partials/header') %>
+<div class="container">
+<% if (add || account) { %>
+    <form method="post" action="/<%=add ? 'account/add' : `account/edit/${account.id}`%>">
+        <div class="form-row">
+            <div class="form-group col-md-6">
+                <label for="username">username</label>
+                <input type="text" class="form-control" name="username" value="<%=add ? '' : account.username%>" required>
+            </div>
+            <div class="form-group col-md-6">
+                <label for="password">password</label>
+                <input type="text" class="form-control" name="password" value="<%=add ? '' : account.password%>" required>
+            </div>
+        </div>
+        <div class="form-row">
+            <div class="form-group col-md-6">
+                <label for="profilePicture">Profile Picture</label>
+                <input type="text" class="form-control" name="profilePicture" value="<%=add ? '' : account.profilePicture%>" required>
+            </div>
+            <div class="form-group col-md-6">
+                <label for="bio">Bio</label>
+                <input type="text" class="form-control" name="bio" value="<%=add ? '' : account.bio%>" required>
+            </div>
+        </div>
+        <div class="form-row">
+            <div class="form-group col-md-6">
+                <% if (add == false) {%><img src="<%=add ? '' : account.profilePicture %>" alt="Image" width="120" height="120" class="rounded-circle"><%}%>
+            </div>
+        </div>
+        <a href="/"><button type="submit" class="btn btn-success"><%= add ? 'Add' : 'Update' %> Account</button></a>
+        <% if (add == false) {%><a href="/logout"><button type="button" class="btn btn-danger float-right">Logout</button></a><%}%>
+    </form>
+<% } else { %>
+    <p class="text-center">Account Not Found.</p>
+<% } %>
+</div>
+</body>
+</html>

@@ -1,0 +1,41 @@
+<%- include('partials/header'); %>
+<div>
+    <% if (useraccount.length > 0) { %>
+    <table class="table">
+        <thead class="thead-dark">
+            <tr>
+                <th><img>Username</th>
+                <th>post</Title></th>
+                <th></th>
+                <th></th>
+                <th></th>
+                <th></th>
+                <th></th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            <% for (let i = 0; i < useraccount.length; i++) { %>
+            <tr>
+                <td><a href="/account/view/<%= useraccount[i].id%>"><img alt="Image" width="30" height="30" src="<%= useraccount[i].profilePicture %>" class="rounded-circle">    <%= useraccount[i].username %></a></td>
+                <td><a href="/post/view/<%= useraccount[i].postId %>"><%= useraccount[i].title %></td>
+                <td><%if(useraccount[i].id == user.id) {%><a href="/post/edit/<%= useraccount[i].postId %>"  class="btn btn-sm btn-success">Edit</td>
+                <td><a href="/post/delete/<%= useraccount[i].postId %>" class="btn btn-sm btn-danger">Delete<%}%>
+                <td><h3>likes: <%=useraccount[i].postLikeCount%></h3></td>
+                <%if(user.id != 0 && useraccount[i].id != user.id) {%>
+                <td><a href="/post/like/<%= useraccount[i].postId %>"><button  class="btn btn-sm btn-link border border-primary">Like</button></a>
+                <%}%></td>
+            </tr>
+            <% } %>
+        </tbody>
+    </table>
+    <%if(user.id != 0) {%><a href="/post/add"><button type="button" class="btn btn-link">+ Add a new post</button></a><%}%>
+    <%if(user.id == 0) {%><a href="/login"><button type="button" class="btn btn-link">Login to create a post</button></a><%}%>
+    <% } else { %>
+        <h1>There are no posts yet</h1>
+        <%if(user.id != 0) {%><a href="/post/add"><button type="button" class="btn btn-link">+ Add a new post</button></a><%}%>
+        <%if(user.id == 0) {%><a href="/login"><button type="button" class="btn btn-link">Login to create a post</button></a><%}%>
+        <% } %>
+</div>
+</body>
+</html>

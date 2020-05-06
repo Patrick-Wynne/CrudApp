@@ -1,0 +1,30 @@
+<%- include('partials/header') %>
+<h1 style="font-weight:bold"><%= post.title%></h1>
+<h3>by <%= post.username%></h3>
+<p><%= post.message%></p>
+<%if(user.id != 0 && post.id != user.id) {%>
+    <a href="/post/like/<%= post.postId %>"><button  class="btn btn-sm btn-link border border-primary">Like</button></a>
+    <%}%>
+<table class="table">
+    <thead class="thead-dark">
+        <tr>
+            <th>Comments</th>
+            <th></th>
+            <th></th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        <% for (let i = 0; i < comment.length; i++) { %>
+            <tr>
+                <td><a href="/account/view/<%= comment[i].id %>"><img alt="Image" width="30" height="30" src="<%= comment[i].profilePicture %>" class="rounded-circle">    <%= comment[i].username %></a></td>
+                <td><%= comment[i].message%></td>
+                <td><%if(comment[i].creatorId == user.id) {%><a href="/comment/edit/<%= comment[i].commentId %>"  class="btn btn-sm btn-success">Edit</td>
+                <td><a href="/comment/delete/<%= comment[i].commentId %>" class="btn btn-sm btn-danger">Delete<%}%>
+            </tr>
+        <%}%>
+    </tbody>
+</table>
+<a href="/comment/add"><button class="btn btn-secondary" style="margin-left: 1%;">Add comment</button></a>
+</body>
+</html>

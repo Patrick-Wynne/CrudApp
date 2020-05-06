@@ -1,0 +1,23 @@
+<%- include('partials/header') %>
+<div class="container">
+<% if (add || post) { %>
+    <form method="post" action="/<%=add ? 'post/add' : `post/edit/${post.postId}`%>">
+        <div class="form-row">
+            <div class="form-group col-md-6">
+                <label for="title">title</label>
+                <input type="text" class="form-control" name="title" value="<%=add ? '' : post.title%>" required>
+            </div>
+            <div class="form-group col-md-6">
+                <label for="message">message</label>
+                <input type="text" class="form-control" name="message" value="<%=add ? '' : post.message%>" required>
+            </div>
+        </div>
+        <button type="submit" class="btn btn-success float-right"><%= add ? 'Add' : 'Update' %> Post</button>
+    </form>
+<% } else { %>
+    <p class="text-center">post Not Found.</p>
+<% } %>
+</div>
+</div>
+</body>
+</html>

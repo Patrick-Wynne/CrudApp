@@ -1,0 +1,36 @@
+<%- include('partials/header'); %>
+
+<div class="container">
+        <h1><%= useraccount.username%></h1>
+    <div class="form-row">
+        <h3><%=useraccount.bio%></h3>
+        <img alt="Image" style="margin-left: 90%;"  width="120" height="120" src="<%= useraccount.profilePicture%>">
+    </div>
+    </div>
+</div>
+    <table class="table">
+        <thead class="thead-dark">
+            <tr>
+                <th><%=useraccount.username%>'s posts</th>
+                <th></th>
+                <th></th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            <% for (let i = 0; i < post.length; i++) { %>
+                <tr>
+                    
+                    <td><a href="/post/view/<%= post[i].postId %>"><%= post[i].title %></td>
+                    <td><%if(useraccount.id == user.id) {%><a href="/post/edit/<%= post[i].postId %>"  class="btn btn-sm btn-success">Edit</td>
+                    <td><a href="/post/delete/<%= post[i].postId %>" class="btn btn-sm btn-danger">Delete<%}%>
+                    <td><h3>likes: <%=post[i].postLikeCount%></h3></td>
+                    <%if(user.id != 0 && useraccount.id != user.id) {%>
+                    <td><a href="/post/like/<%= post[i].postId %>"><button  class="btn btn-sm btn-link border border-primary">Like</button></a>
+                    <%}%></td>
+                </tr>
+            <%}%>
+        </tbody>
+    </table>
+</body>
+</html>
